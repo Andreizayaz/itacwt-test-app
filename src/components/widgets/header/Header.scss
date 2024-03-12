@@ -1,0 +1,28 @@
+.header {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: capitalize;
+  background-color: rgba(115, 203, 244, 0.8);
+
+  &__container {
+    padding: 20px 0;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 30px;
+
+    &__item {
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &_active {
+        color: #f4ce98;
+      }
+    }
+  }
+}
