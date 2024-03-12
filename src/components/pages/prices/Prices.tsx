@@ -1,4 +1,5 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement } from "react";
+import { Price } from "src/components/entities";
 
-const Prices: FC = (): ReactElement => <h2>Prices</h2>;
-export default Prices
+const Prices: FC = (): ReactElement => <Price />;
+export default Prices;
