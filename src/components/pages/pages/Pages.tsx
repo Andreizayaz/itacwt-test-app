@@ -1,4 +1,5 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement } from "react";
+import { Page } from "src/components/entities";
 
-const Pages: FC = (): ReactElement => <h2>Pages</h2>;
-export default Pages
+const Pages: FC = (): ReactElement => <Page />;
+export default Pages;
