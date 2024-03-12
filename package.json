@@ -11,6 +11,8 @@
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
     "@types/react-helmet": "^6.1.11",
+    "concurrently": "^8.2.2",
+    "json-server": "^1.0.0-alpha.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -21,7 +23,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "react-scripts start",
+    "server": "npx json-server ./src/server/db.json --port=5000",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
