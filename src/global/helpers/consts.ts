@@ -21,3 +21,9 @@ const PUBLISHED = "published";
 const UPDATED = "updated";
 const REMOVED = "removed";
 export const modifyedHeadings = [CREATED, PUBLISHED, UPDATED, REMOVED];
+
+// for string fields
+const NAME_FIELD = "name";
+const DESC_FIELD = "description";
+const TITLE_FIELD = "title";
+export const stringFields = [NAME_FIELD, DESC_FIELD, TITLE_FIELD]

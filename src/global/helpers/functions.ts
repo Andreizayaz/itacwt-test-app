@@ -11,7 +11,7 @@ import {
 const addZero = (char: string) => (parseInt(char) < 10 ? `0${char}` : char);
 
 const modifyDate = (dateString: string) => {
-  const fullDate = new Date("1985-08-09T02:10:18.0Z");
+  const fullDate = new Date(dateString);
   const date = fullDate
     .toLocaleDateString(DATE_LOCALES)
     .split("/")
