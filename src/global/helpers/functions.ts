@@ -25,18 +25,19 @@ const modifyDate = (dateString: string) => {
 const modifyStatus = (status: boolean) => (status ? ACTIVE : INACTIVE);
 
 export const makeUserFriendlyData = (obj: any) => {
-  for (const key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+  const tempObj = structuredClone(obj)
+  for (const key in tempObj) {
+    if (Object.prototype.hasOwnProperty.call(tempObj, key)) {
       if (key === STATUS) {
-        obj[key] = modifyStatus(obj[key]);
+        tempObj[key] = modifyStatus(tempObj[key]);
       }
       if (actions.includes(key)) {
-        obj[key] = modifyDate(obj[key]);
+        tempObj[key] = modifyDate(tempObj[key]);
       }
     }
   }
 
-  return obj;
+  return tempObj;
 };
 
 export const getHeadingsForTable = (key: string) => {

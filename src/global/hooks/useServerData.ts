@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import { getServerData } from "src/api";
-import { getHeadingsForTable, makeUserFriendlyData } from "../helpers/functions";
-import { ID } from "../helpers/consts";
+import { makeUserFriendlyData } from "../helpers/functions";
+import { useDispatch, useSelector } from "react-redux";
+import { selectServerData, setServerData } from "src/store";
 
 export const useServerData = (url: string) => {
-  const [serverData, setServerData] = useState<any[]>([]);
   const [displayData, setDisplayData] = useState<any[]>([]);
-  const [tableHeadings, setTableHeadings]=useState<any[]>([])
+
+  const dispatch = useDispatch();
+  const serverData = useSelector(selectServerData);
 
   useEffect(() => {
-    Promise.resolve(getServerData(url)).then((data) => setServerData(data));
-  }, [url]);
+    Promise.resolve(getServerData(url)).then((data) =>
+      dispatch(setServerData(data))
+    );
+  }, [dispatch, url]);
 
-   useEffect(() => {   
+  useEffect(() => {
     const userFriendlyData = serverData.map(makeUserFriendlyData);
-    setDisplayData(userFriendlyData)
-    if (serverData.length) {
-      const headings = Object.keys(serverData[0]).filter(key=>key!==ID).map(getHeadingsForTable);
-      setTableHeadings(headings)
-    }
-    }, [serverData]);
+    setDisplayData(userFriendlyData);
+  }, [serverData]);
 
-  return { displayData, tableHeadings };
+  return { displayData };
 };

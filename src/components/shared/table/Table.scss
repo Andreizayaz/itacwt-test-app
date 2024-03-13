@@ -19,9 +19,6 @@ table {
     &:first-child {
       border-top-left-radius: 20px;
     }
-
-    &:last-child {
-    }
   }
 
   th,
@@ -41,6 +38,12 @@ table {
 
       &:nth-child(even) {
         background-color: #f0ead6;
+      }
+
+      td{
+        &:nth-child(n+2){
+          text-align: center;
+        }
       }
 
       &:last-child {
