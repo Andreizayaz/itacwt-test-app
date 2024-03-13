@@ -2,7 +2,8 @@ import { FC, ReactElement } from "react";
 import { Modal, Table } from "src/components/shared";
 import { useEditForm, useServerData, useTableHeadings } from "src/global/hooks";
 import { PAGES_URL } from "src/router/consts";
-import { FORM_LABEL, MODAL_HEADING, SAVE_BTN } from "./helpers/consts";
+import { FORM_LABEL } from "./helpers/consts";
+import { MODAL_HEADING, SAVE_BTN, UPDATED_AT } from "src/global/helpers/consts";
 
 export const Page: FC = (): ReactElement => {
   const { displayData } = useServerData(PAGES_URL);
@@ -20,7 +21,7 @@ export const Page: FC = (): ReactElement => {
       />
       {isOpen && (
         <Modal heading={MODAL_HEADING} closeModal={closeModal}>
-          <form onSubmit={(e)=>submitData(e)}>
+          <form onSubmit={(e)=>submitData(e, UPDATED_AT)}>
             <div className="form-group">
               <label>{FORM_LABEL}</label>
               <input

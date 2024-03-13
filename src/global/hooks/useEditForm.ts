@@ -1,10 +1,11 @@
 import { useState, MouseEvent, FormEvent } from "react";
-import { useSelector } from "react-redux";
-import { selectServerData } from "src/store";
+import { useDispatch, useSelector } from "react-redux";
+import { selectServerData, setServerData } from "src/store";
 import { useModal } from "./useModal";
-import { editServerData } from "src/api";
+import { editServerData, getServerData } from "src/api";
 
 export const useEditForm = (url: string) => {
+  const dispatch = useDispatch();
   const [payload, setPayload] = useState({});
   const [dataForEdit, setDataForEdit] = useState();
   const [id, setId] = useState<any>();
@@ -25,12 +26,22 @@ export const useEditForm = (url: string) => {
     }
   };
 
-  const submitData = async (e: FormEvent<HTMLFormElement>) => {
+  const submitData = async (
+    e: FormEvent<HTMLFormElement>,
+    updateDateKey?: string
+  ) => {
     e.preventDefault();
-    const modifiedData = await editServerData(`${url}/${id}`, payload);
+    if (updateDateKey) {
+      await editServerData(`${url}/${id}`, {
+        ...payload,
+        [updateDateKey]: new Date(),
+      });
+    } else {
+      await editServerData(`${url}/${id}`, payload);
+    }
     closeModal();
-    window.location.reload()
-    return modifiedData;
+    const updatedData = await getServerData(url);
+    dispatch(setServerData(updatedData));
   };
 
   const handleInput = (e: any) =>

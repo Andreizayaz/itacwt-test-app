@@ -4,7 +4,7 @@ export const DATE_LOCALES = "en-us";
 // for actions
 const CREATED_AT = "createdAt";
 const PUBLISHED_AT = "publishedAt";
-const UPDATED_AT = "updatedAt";
+export const UPDATED_AT = "updatedAt";
 const REMOVED_AT = "removedAt";
 export const actions = [CREATED_AT, PUBLISHED_AT, UPDATED_AT, REMOVED_AT];
 
@@ -26,4 +26,8 @@ export const modifyedHeadings = [CREATED, PUBLISHED, UPDATED, REMOVED];
 const NAME_FIELD = "name";
 const DESC_FIELD = "description";
 const TITLE_FIELD = "title";
-export const stringFields = [NAME_FIELD, DESC_FIELD, TITLE_FIELD]
+export const stringFields = [NAME_FIELD, DESC_FIELD, TITLE_FIELD];
+
+//  for modal
+export const MODAL_HEADING = "edit";
+export const SAVE_BTN = "save";
