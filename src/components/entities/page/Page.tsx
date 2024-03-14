@@ -8,7 +8,13 @@ import {
 } from "src/global/hooks";
 import { PAGES_URL } from "src/router/consts";
 import { ALL, FORM_LABEL } from "./helpers/consts";
-import { ACTIVE, INACTIVE, MODAL_HEADING, SAVE_BTN, UPDATED_AT } from "src/global/helpers/consts";
+import {
+  ACTIVE,
+  INACTIVE,
+  MODAL_HEADING,
+  SAVE_BTN,
+  UPDATED_AT,
+} from "src/global/helpers/consts";
 import { Controls } from "src/components/shared/controls";
 
 export const Page: FC = (): ReactElement => {
@@ -24,7 +30,10 @@ export const Page: FC = (): ReactElement => {
     handleInput,
   } = useEditForm(PAGES_URL);
 
-  const { handleSearchInput, handleSelectStatus } = useControls();
+  const { handleSearchInput, handleSelectStatus, handleSort } = useControls(
+    ["title"],
+    "title"
+  );
 
   return (
     <>
@@ -34,10 +43,8 @@ export const Page: FC = (): ReactElement => {
           handleSearchInput(e, ["title"])
         }
         handleChange={handleSelectStatus}
-        handleFilter={function (e: ChangeEvent<HTMLSelectElement>): void {
-          throw new Error("Function not implemented.");
-        }}
-        filterOptions={["first", "second"]}
+        handleFilter={handleSort}
+        filterOptions={["reset", "by desc", "by asc"]}
       />
       <Table
         tableData={displayData}

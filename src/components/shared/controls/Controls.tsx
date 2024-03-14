@@ -32,7 +32,7 @@ export const Controls: FC<ControlsPropsTypes> = ({
       }}
     >
       {options.map((item) => (
-        <option key={item} value={item} selected={item===ALL}>
+        <option key={item} value={item} selected={item === ALL}>
           {item}
         </option>
       ))}
@@ -44,7 +44,12 @@ export const Controls: FC<ControlsPropsTypes> = ({
       }}
     >
       {filterOptions.map((item) => (
-        <option key={item} value={item}>
+        <option
+          key={item}
+          value={item}
+          disabled={item === "reset"}
+          selected={item === "reset"}
+        >
           {item}
         </option>
       ))}
