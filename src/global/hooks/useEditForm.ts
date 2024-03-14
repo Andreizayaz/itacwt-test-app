@@ -1,6 +1,6 @@
 import { useState, MouseEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectServerData, setServerData } from "src/store";
+import { selectSearchFilterData, setServerData } from "src/store";
 import { useModal } from "./useModal";
 import { editServerData, getServerData } from "src/api";
 
@@ -9,7 +9,7 @@ export const useEditForm = (url: string) => {
   const [payload, setPayload] = useState({});
   const [dataForEdit, setDataForEdit] = useState();
   const [id, setId] = useState<any>();
-  const serverData = useSelector(selectServerData);
+  const serverData = useSelector(selectSearchFilterData);
 
   const { isOpen, openModal, closeModal } = useModal();
 

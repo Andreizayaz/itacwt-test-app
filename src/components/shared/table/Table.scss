@@ -40,8 +40,8 @@ table {
         background-color: #f0ead6;
       }
 
-      td{
-        &:nth-child(n+2){
+      td {
+        &:nth-child(n + 2) {
           text-align: center;
         }
       }
@@ -57,6 +57,12 @@ table {
           }
         }
       }
+    }
+
+    .no-result {
+      text-align: center;
+      text-transform: capitalize;
+      font-size: 20px;
     }
   }
 

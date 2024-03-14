@@ -3,7 +3,7 @@ import { ID } from "src/global/helpers/consts";
 
 import "./Table.scss";
 import { getClassNameForCell } from "./helpers/functions";
-import { EDIT_BTN } from "./helpers/consts";
+import { EDIT_BTN, NO_RESULTS } from "./helpers/consts";
 import { Button } from "../button";
 
 type TablePropsTypes = {
@@ -31,21 +31,25 @@ export const Table: FC<TablePropsTypes> = ({
           openEdit(e);
         }}
       >
-        {tableData.map((item) => (
-          <tr key={item?.id} id={item?.id}>
-            {Object.entries(item).map(
-              ([key, value]: [string, any]) =>
-                key !== ID && (
-                  <td key={value} className={getClassNameForCell(key, value)}>
-                    {value}
-                  </td>
-                )
-            )}
-            <td>
-              <Button classes="edit-btn">{EDIT_BTN}</Button>
-            </td>
-          </tr>
-        ))}
+        {tableData.length ? (
+          tableData.map((item) => (
+            <tr key={item?.id} id={item?.id}>
+              {Object.entries(item).map(
+                ([key, value]: [string, any]) =>
+                  key !== ID && (
+                    <td key={value} className={getClassNameForCell(key, value)}>
+                      {value}
+                    </td>
+                  )
+              )}
+              <td>
+                <Button classes="edit-btn">{EDIT_BTN}</Button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <p className="no-result">{NO_RESULTS}</p>
+        )}
       </tbody>
     </table>
   </>

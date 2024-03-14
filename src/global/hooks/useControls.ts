@@ -1,6 +1,7 @@
 import { FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectServerData, setSearchResult } from "src/store";
+import { setSearchResult } from "src/store";
+import { selectServerData } from "src/store/selectors";
 
 export const useControls = () => {
   const serverData = useSelector(selectServerData);
@@ -9,7 +10,7 @@ export const useControls = () => {
   const searchByKeys = (obj: any, searchKeys: string[], value: string) => {
     for (let i = 0; i < searchKeys.length; i++) {
       if (obj.hasOwnProperty(searchKeys[i])) {
-        return obj[searchKeys[i] as keyof typeof obj].includes(value);
+        return obj[searchKeys[i] as keyof typeof obj]?.toLowerCase().includes(value.toLowerCase());
       }
     }
   };
