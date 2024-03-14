@@ -2,6 +2,7 @@ import { FC, ReactElement, FormEvent, ChangeEvent } from "react";
 import { INPUT_PLACEHOLDER } from "./helpers/consts";
 
 import "./Controls.scss";
+import { ALL } from "src/components/entities/page/helpers/consts";
 
 type ControlsPropsTypes = {
   options: string[];
@@ -31,7 +32,7 @@ export const Controls: FC<ControlsPropsTypes> = ({
       }}
     >
       {options.map((item) => (
-        <option key={item} value={item}>
+        <option key={item} value={item} selected={item===ALL}>
           {item}
         </option>
       ))}

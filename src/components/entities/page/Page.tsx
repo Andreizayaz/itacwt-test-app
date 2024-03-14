@@ -7,8 +7,8 @@ import {
   useTableHeadings,
 } from "src/global/hooks";
 import { PAGES_URL } from "src/router/consts";
-import { FORM_LABEL } from "./helpers/consts";
-import { MODAL_HEADING, SAVE_BTN, UPDATED_AT } from "src/global/helpers/consts";
+import { ALL, FORM_LABEL } from "./helpers/consts";
+import { ACTIVE, INACTIVE, MODAL_HEADING, SAVE_BTN, UPDATED_AT } from "src/global/helpers/consts";
 import { Controls } from "src/components/shared/controls";
 
 export const Page: FC = (): ReactElement => {
@@ -24,18 +24,16 @@ export const Page: FC = (): ReactElement => {
     handleInput,
   } = useEditForm(PAGES_URL);
 
-  const { handleSearchInput } = useControls();
+  const { handleSearchInput, handleSelectStatus } = useControls();
 
   return (
     <>
       <Controls
-        options={["one", "two"]}
+        options={[ALL, ACTIVE, INACTIVE]}
         handleInput={(e: FormEvent<HTMLInputElement>) =>
           handleSearchInput(e, ["title"])
         }
-        handleChange={function (e: ChangeEvent<HTMLSelectElement>): void {
-          throw new Error("Function not implemented.");
-        }}
+        handleChange={handleSelectStatus}
         handleFilter={function (e: ChangeEvent<HTMLSelectElement>): void {
           throw new Error("Function not implemented.");
         }}

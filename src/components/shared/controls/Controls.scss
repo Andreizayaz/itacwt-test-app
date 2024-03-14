@@ -17,9 +17,11 @@
   select {
     padding: 10px;
     min-width: 200px;
+    text-transform: capitalize;
   }
 
   option {
     padding: 10px;
+    text-transform: capitalize;
   }
 }
