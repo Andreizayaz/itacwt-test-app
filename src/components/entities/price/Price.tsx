@@ -1,9 +1,11 @@
-import { FC, ReactElement } from "react";
+import { FC, FormEvent, ReactElement } from "react";
 import { Modal, Table } from "src/components/shared";
-import { useEditForm, useServerData, useTableHeadings } from "src/global/hooks";
+import { useControls, useEditForm, useServerData, useTableHeadings } from "src/global/hooks";
 import { PRICES_URL } from "src/router/consts";
 import { FORM_LABEL } from "./helpers/consts";
-import { MODAL_HEADING, SAVE_BTN } from "src/global/helpers/consts";
+import { ACTIVE, INACTIVE, MODAL_HEADING, SAVE_BTN } from "src/global/helpers/consts";
+import { Controls } from "src/components/shared/controls";
+import { ALL } from "../page/helpers/consts";
 
 export const Price: FC = (): ReactElement => {
   const { displayData } = useServerData(PRICES_URL);
@@ -18,8 +20,22 @@ export const Price: FC = (): ReactElement => {
     handleInput,
   } = useEditForm(PRICES_URL);
 
+  const { handleSearchInput, handleSelectStatus, handleSort } = useControls(
+    ["description"],
+    "description"
+  );
+
   return (
     <>
+      <Controls
+        options={[ALL, ACTIVE, INACTIVE]}
+        handleInput={(e: FormEvent<HTMLInputElement>) =>
+          handleSearchInput(e, ["title"])
+        }
+        handleChange={handleSelectStatus}
+        handleFilter={handleSort}
+        filterOptions={["reset", "by desc", "by asc"]}
+      />
       <Table
         tableData={displayData}
         tableHeadings={tableHeadings}
