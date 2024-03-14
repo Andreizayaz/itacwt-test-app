@@ -21,13 +21,12 @@ export const serverDataSlice = createSlice({
       state.serverData = action.payload;
       state.searchFilterData = [...state.serverData];
     },
+    setSearchResult:(state, action: PayloadAction<any[]>)=>{
+      state.searchFilterData=action.payload
+    }
   },
 });
 
-export const { setServerData } = serverDataSlice.actions;
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectServerData = (state: RootState) =>
-  state.serverData.serverData;
+export const { setServerData, setSearchResult } = serverDataSlice.actions;
 
 export default serverDataSlice.reducer;
