@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, ReactElement } from "react";
+import { FC, FormEvent, ReactElement } from "react";
 import { Modal, Table } from "src/components/shared";
 import {
   useControls,

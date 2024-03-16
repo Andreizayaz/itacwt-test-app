@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "./store";
+import { PageType, PriceType, ProductType } from "./types";
 
-type ServerDataState = {
-  serverData: any[];
-  searchFilterData: any[];
+type ServerDataState<T> = {
+  serverData: T[];
+  searchFilterData: T[];
 };
 
 // Define the initial state using that type
-const initialState: ServerDataState = {
+const initialState: ServerDataState<ProductType | PageType | PriceType> = {
   serverData: [],
   searchFilterData: [],
 };
@@ -21,9 +21,9 @@ export const serverDataSlice = createSlice({
       state.serverData = action.payload;
       state.searchFilterData = [...state.serverData];
     },
-    setSearchResult:(state, action: PayloadAction<any[]>)=>{
-      state.searchFilterData=action.payload
-    }
+    setSearchResult: (state, action: PayloadAction<any[]>) => {
+      state.searchFilterData = action.payload;
+    },
   },
 });
 

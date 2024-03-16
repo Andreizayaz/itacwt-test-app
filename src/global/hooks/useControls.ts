@@ -27,10 +27,6 @@ export const useControls = (searchKeys: string[], keyForSort: string) => {
   const handleSearchInput = (
     e: FormEvent<HTMLInputElement>
   ) => {
-    /* const temp = serverData.filter((item) =>
-      searchByKeys(item, searchKeys, (e.target as HTMLInputElement).value)
-    );
-    dispatch(setSearchResult(temp)); */
     setSearchFilterParams({
       ...searchFilterParams,
       search: (e.target as HTMLInputElement).value,
@@ -38,17 +34,6 @@ export const useControls = (searchKeys: string[], keyForSort: string) => {
   };
 
   const handleSelectStatus = (e: ChangeEvent<HTMLSelectElement>) => {
-    /* const temp = serverData.filter((item) => {
-      switch (e.target.value) {
-        case ACTIVE:
-          return item?.active;
-        case INACTIVE:
-          return !item?.active;      
-        default:
-          return true;
-      }
-    });
-    dispatch(setSearchResult(temp)); */
     setSearchFilterParams({ ...searchFilterParams, filter: e.target.value });
   };
 
@@ -67,7 +52,7 @@ export const useControls = (searchKeys: string[], keyForSort: string) => {
             return true;
         }
       })
-      .sort((a, b) => {
+      .sort((a:any, b:any) => {
         if (searchFilterParams.sort === "by asc") {
           return a[keyForSort]?.localeCompare(b[keyForSort]);
         } 
