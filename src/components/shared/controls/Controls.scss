@@ -1,0 +1,27 @@
+.controls {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 20px;
+
+  input[type="text"] {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+
+    &::placeholder {
+      text-transform: capitalize;
+    }
+  }
+
+  select {
+    padding: 10px;
+    min-width: 200px;
+    text-transform: capitalize;
+  }
+
+  option {
+    padding: 10px;
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,21 @@
+.footer {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+  background-color: rgba(115, 203, 244, 0.8);
+
+  .footer__items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 30px;
+    padding: 20px 0;
+  }
+
+  a.info-item {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
