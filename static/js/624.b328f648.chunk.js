@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkitacwt_test_app=self.webpackChunkitacwt_test_app||[]).push([[624],{371:(e,a,t)=>{t.r(a),t.d(a,{default:()=>m});var s=t(647);const c="Home page",i=t.p+"static/media/homeImage.49859e8d3e679b3fb7ac.png";var p=t(579);const m=()=>(0,p.jsxs)(p.Fragment,{children:[(0,p.jsx)(s.JP,{title:c}),(0,p.jsx)(s.Av,{heading:c}),(0,p.jsx)("img",{className:"image",src:i,alt:"home"})]})}}]);
+//# sourceMappingURL=624.b328f648.chunk.js.map
