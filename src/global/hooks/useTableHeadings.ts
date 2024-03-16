@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { getHeadingsForTable } from "../helpers/functions";
-import { useSelector } from "react-redux";
-import { selectSearchFilterData } from "src/store";
 import { ID } from "../helpers/consts";
 
-export const useTableHeadings = () => {
+export const useTableHeadings = (data: any[]) => {
   const [tableHeadings, setTableHeadings] = useState<any[]>([]);
-  const serverData = useSelector(selectSearchFilterData);
-
   useEffect(() => {
-    if (serverData.length) {
-      const headings = Object.keys(serverData[0])
-        .filter((key) => key !== ID)
-        .map(getHeadingsForTable);
-      setTableHeadings(headings);
+    if (data.length) {
+      const maxKeysArray = data
+        .map((item) => Object.keys(item))
+        .find((item) => Math.max(Object.keys(item).length));
+      if (maxKeysArray?.length) {
+        const headings = maxKeysArray
+          .filter((key) => key !== ID)
+          .map(getHeadingsForTable);
+        setTableHeadings(headings);
+      }
     }
-  }, [serverData]);
+  }, [data]);
 
   return { tableHeadings };
 };

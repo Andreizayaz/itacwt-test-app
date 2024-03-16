@@ -19,7 +19,7 @@ import { Controls } from "src/components/shared/controls";
 
 export const Page: FC = (): ReactElement => {
   const { displayData } = useServerData(PAGES_URL);
-  const { tableHeadings } = useTableHeadings();
+  const { tableHeadings } = useTableHeadings(displayData);
 
   const {
     dataForEdit,
@@ -40,7 +40,7 @@ export const Page: FC = (): ReactElement => {
       <Controls
         options={[ALL, ACTIVE, INACTIVE]}
         handleInput={(e: FormEvent<HTMLInputElement>) =>
-          handleSearchInput(e, ["title"])
+          handleSearchInput(e)
         }
         handleChange={handleSelectStatus}
         handleFilter={handleSort}

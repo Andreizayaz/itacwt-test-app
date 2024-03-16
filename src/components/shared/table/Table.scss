@@ -1,5 +1,10 @@
-table {
+.table-wrapper {
   margin: auto;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
   border-spacing: 0;
 
   thead tr {

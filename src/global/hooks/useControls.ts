@@ -25,8 +25,7 @@ export const useControls = (searchKeys: string[], keyForSort: string) => {
   };
 
   const handleSearchInput = (
-    e: FormEvent<HTMLInputElement>,
-    searchKeys: string[]
+    e: FormEvent<HTMLInputElement>
   ) => {
     /* const temp = serverData.filter((item) =>
       searchByKeys(item, searchKeys, (e.target as HTMLInputElement).value)

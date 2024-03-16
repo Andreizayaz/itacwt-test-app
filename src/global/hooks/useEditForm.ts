@@ -19,7 +19,7 @@ export const useEditForm = (url: string) => {
       (e.target as HTMLElement).closest("tr");
     if (isEdit) {
       const id = (e.target as HTMLElement).closest("tr")?.id;
-      const temp = serverData.find((data) => data.id === id);
+      const temp = serverData.find((data) => data.id?.toString() === id);
       setDataForEdit(temp);
       openModal();
       id && setId(id);

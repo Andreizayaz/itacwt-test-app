@@ -11,6 +11,9 @@ import {
 const addZero = (char: string) => (parseInt(char) < 10 ? `0${char}` : char);
 
 const modifyDate = (dateString: string) => {
+  if (!dateString.length) {
+    return "";
+  }
   const fullDate = new Date(dateString);
   const date = fullDate
     .toLocaleDateString(DATE_LOCALES)
@@ -24,8 +27,24 @@ const modifyDate = (dateString: string) => {
 
 const modifyStatus = (status: boolean) => (status ? ACTIVE : INACTIVE);
 
+const getObjFromNestedFields = (key: string, value: Object) => {
+  const obj: {
+    [key: string]: any;
+  } = {};
+  const getNestedFields = ([key, value]: [string, any]): any => {
+    if (value?.constructor !== Object) {
+      obj[key as string] = value;
+      return { [key]: value };
+    }
+
+    return Object.entries(value).map(getNestedFields);
+  };
+  getNestedFields([key, value]);
+  return obj;
+};
+
 export const makeUserFriendlyData = (obj: any) => {
-  const tempObj = structuredClone(obj)
+  const tempObj = structuredClone(obj);
   for (const key in tempObj) {
     if (Object.prototype.hasOwnProperty.call(tempObj, key)) {
       if (key === STATUS) {
@@ -33,6 +52,11 @@ export const makeUserFriendlyData = (obj: any) => {
       }
       if (actions.includes(key)) {
         tempObj[key] = modifyDate(tempObj[key]);
+      }
+      if (tempObj[key]?.constructor === Object) {
+        const objFromNestedFields = getObjFromNestedFields(key, tempObj[key]);
+        Object.assign(tempObj, objFromNestedFields);
+        delete tempObj[key];
       }
     }
   }
@@ -51,4 +75,18 @@ export const getHeadingsForTable = (key: string) => {
   }
 
   return key;
+};
+
+export const fillEmptySells = (data: any[]) => {
+   const keys = data
+     .map((item: any) => Object.keys(item))
+     .find((keysList: string[]) => Math.max(keysList.length));
+  const modData = data.map((dataItem) => {
+    const emptyKey = keys?.filter(
+      (keys) => !Object.keys(dataItem).includes(keys)
+    );
+    emptyKey?.forEach((emptyItem) => (dataItem[emptyItem] = ""));
+    return dataItem;
+  });
+  return modData;
 };

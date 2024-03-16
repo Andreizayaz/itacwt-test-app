@@ -1,14 +1,24 @@
 import { FC, FormEvent, ReactElement } from "react";
 import { Modal, Table } from "src/components/shared";
-import { useControls, useEditForm, useServerData, useTableHeadings } from "src/global/hooks";
-import { PRICES_URL } from "src/router/consts";
-import { FORM_LABEL } from "./helpers/consts";
-import { ACTIVE, INACTIVE, MODAL_HEADING, SAVE_BTN } from "src/global/helpers/consts";
+import {
+  useControls,
+  useEditForm,
+  useServerData,
+  useTableHeadings,
+} from "src/global/hooks";
+import { PRODUCTS_URL } from "src/router/consts";
+import { ALL, FORM_LABEL } from "./helpers/consts";
+import {
+  ACTIVE,
+  INACTIVE,
+  MODAL_HEADING,
+  SAVE_BTN,
+  UPDATED_AT,
+} from "src/global/helpers/consts";
 import { Controls } from "src/components/shared/controls";
-import { ALL } from "../page/helpers/consts";
 
-export const Price: FC = (): ReactElement => {
-  const { displayData } = useServerData(PRICES_URL);
+export const Product: FC = (): ReactElement => {
+  const { displayData } = useServerData(PRODUCTS_URL);
   const { tableHeadings } = useTableHeadings(displayData);
 
   const {
@@ -18,20 +28,18 @@ export const Price: FC = (): ReactElement => {
     closeModal,
     submitData,
     handleInput,
-  } = useEditForm(PRICES_URL);
+  } = useEditForm(PRODUCTS_URL);
 
   const { handleSearchInput, handleSelectStatus, handleSort } = useControls(
-    ["description"],
-    "description"
+    ["name"],
+    "name"
   );
 
   return (
     <>
       <Controls
         options={[ALL, ACTIVE, INACTIVE]}
-        handleInput={(e: FormEvent<HTMLInputElement>) =>
-          handleSearchInput(e)
-        }
+        handleInput={(e: FormEvent<HTMLInputElement>) => handleSearchInput(e)}
         handleChange={handleSelectStatus}
         handleFilter={handleSort}
         filterOptions={["reset", "by desc", "by asc"]}
@@ -43,7 +51,7 @@ export const Price: FC = (): ReactElement => {
       />
       {isOpen && (
         <Modal heading={MODAL_HEADING} closeModal={closeModal}>
-          <form onSubmit={(e) => submitData(e)}>
+          <form onSubmit={(e) => submitData(e, UPDATED_AT)}>
             <div className="form-group">
               <label>{FORM_LABEL}</label>
               <input

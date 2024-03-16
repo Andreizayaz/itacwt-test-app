@@ -11,9 +11,10 @@ export const useServerData = (url: string) => {
   const serverData = useSelector(selectSearchFilterData);
 
   useEffect(() => {
-    Promise.resolve(getServerData(url)).then((data) =>
-      dispatch(setServerData(data))
-    );
+    Promise.resolve(getServerData(url)).then((data) => {
+      dispatch(setServerData(data));
+      return;
+    });
   }, [dispatch, url]);
 
   useEffect(() => {

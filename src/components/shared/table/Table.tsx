@@ -17,7 +17,7 @@ export const Table: FC<TablePropsTypes> = ({
   tableData,
   openEdit,
 }): ReactElement => (
-  <>
+  <div className="table-wrapper">
     <table>
       <thead>
         <tr>
@@ -52,5 +52,5 @@ export const Table: FC<TablePropsTypes> = ({
         )}
       </tbody>
     </table>
-  </>
+  </div>
 );
