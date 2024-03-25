@@ -6,6 +6,7 @@ import {
   STATUS_HEADING,
   actions,
   modifyedHeadings,
+  stringFields,
 } from "./consts";
 
 const addZero = (char: string) => (parseInt(char) < 10 ? `0${char}` : char);
@@ -78,9 +79,9 @@ export const getHeadingsForTable = (key: string) => {
 };
 
 export const fillEmptySells = (data: any[]) => {
-   const keys = data
-     .map((item: any) => Object.keys(item))
-     .find((keysList: string[]) => Math.max(keysList.length));
+  const keys = data
+    .map((item: any) => Object.keys(item))
+    .find((keysList: string[]) => Math.max(keysList.length));
   const modData = data.map((dataItem) => {
     const emptyKey = keys?.filter(
       (keys) => !Object.keys(dataItem).includes(keys)
@@ -89,4 +90,15 @@ export const fillEmptySells = (data: any[]) => {
     return dataItem;
   });
   return modData;
+};
+
+export const getClassNameForCell = (key: string, value: any) => {
+  if (stringFields.includes(key)) {
+    return "colorized capitalize";
+  }
+  if (typeof value === "string") {
+    return "capitalize";
+  }
+
+  return "";
 };

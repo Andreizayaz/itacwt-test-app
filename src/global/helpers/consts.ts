@@ -31,3 +31,8 @@ export const stringFields = [NAME_FIELD, DESC_FIELD, TITLE_FIELD];
 //  for modal
 export const MODAL_HEADING = "edit";
 export const SAVE_BTN = "save";
+
+// for table
+export const EDIT_BTN = "edit";
+export const NO_RESULTS = "no data results";
+
