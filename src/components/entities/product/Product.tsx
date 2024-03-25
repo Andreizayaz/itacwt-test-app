@@ -1,5 +1,5 @@
 import { FC, FormEvent, ReactElement } from "react";
-import { Modal, Table } from "src/components/shared";
+import { Button, Modal, Table } from "src/components/shared";
 import {
   useControls,
   useEditForm,
@@ -10,12 +10,16 @@ import { PRODUCTS_URL } from "src/router/consts";
 import { ALL, FORM_LABEL } from "./helpers/consts";
 import {
   ACTIVE,
+  EDIT_BTN,
+  ID,
   INACTIVE,
   MODAL_HEADING,
+  NO_RESULTS,
   SAVE_BTN,
   UPDATED_AT,
 } from "src/global/helpers/consts";
 import { Controls } from "src/components/shared/controls";
+import { getClassNameForCell } from "src/global/helpers/functions";
 
 export const Product: FC = (): ReactElement => {
   const { displayData } = useServerData(PRODUCTS_URL);
@@ -44,11 +48,27 @@ export const Product: FC = (): ReactElement => {
         handleFilter={handleSort}
         filterOptions={["reset", "by desc", "by asc"]}
       />
-      <Table
-        tableData={displayData}
-        tableHeadings={tableHeadings}
-        openEdit={openEditForm}
-      />
+      <Table tableHeadings={tableHeadings} openEdit={openEditForm}>
+        {displayData.length ? (
+          displayData.map((item) => (
+            <tr key={item?.id} id={item?.id}>
+              {Object.entries(item).map(
+                ([key, value]: [string, any]) =>
+                  key !== ID && (
+                    <td key={value} className={getClassNameForCell(key, value)}>
+                      {value}
+                    </td>
+                  )
+              )}
+              <td>
+                <Button classes="edit-btn">{EDIT_BTN}</Button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <p className="no-result">{NO_RESULTS}</p>
+        )}
+      </Table>
       {isOpen && (
         <Modal heading={MODAL_HEADING} closeModal={closeModal}>
           <form onSubmit={(e) => submitData(e, UPDATED_AT)}>
